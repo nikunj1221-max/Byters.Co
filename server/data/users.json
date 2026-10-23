@@ -1,0 +1,26 @@
+[
+  {
+    "id": "user_1",
+    "name": "John Doe",
+    "email": "johndoe@mail.com",
+    "password": "$2b$10$515/TUw8CViPMcZCMs6wp.d.0NfZQ20s8e.qon5x6hxb091b0GUte",
+    "role": "customer",
+    "createdAt": "2026-10-23T15:28:23.876Z"
+  },
+  {
+    "id": "user_1792769319153",
+    "name": "Amanda Rivera",
+    "email": "amanda@merka.coffee",
+    "password": "$2b$10$xOUh1F8iddTrLF/6YLZjGOLZbJNYZY7Xba.Mk5UGoWuGuFq61uF66",
+    "role": "customer",
+    "createdAt": "2026-10-23T15:28:39.153Z"
+  },
+  {
+    "id": "user_1792772049407",
+    "name": "nikunj  verma",
+    "email": "vermanikunj76@gmail.com",
+    "password": "$2b$10$LIIDtZnCj4x/o0cWTmMfS.42ysYFNLCDBowSwAA3Kdw6BzML.xKfC",
+    "role": "customer",
+    "createdAt": "2026-10-23T16:14:09.407Z"
+  }
+]
