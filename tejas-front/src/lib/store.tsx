@@ -2,14 +2,14 @@ import { createContext, useCallback, useContext, useState, type ReactNode } from
 import { type State, syncDrafts, uid } from './model'
 import { buildSeed } from './seed'
 
-const KEY = 'siolim-runout-v4'
+const KEY = 'siolim-runout-v5'
 
 function load(): State {
   try {
     const raw = localStorage.getItem(KEY)
     if (raw) {
       const s = JSON.parse(raw) as State
-      if (s.version === 4) { syncDrafts(s); return s }
+      if (s.version === 5) { syncDrafts(s); return s }
     }
   } catch { /* corrupted storage: reseed */ }
   return buildSeed()

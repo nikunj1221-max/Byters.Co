@@ -19,7 +19,7 @@ export const BEANS: Bean[] = [
   { id: 'house', name: 'Siolim House Espresso', origin: 'Brazil · India blend', lot: 'HSE-24-310', cert: 'Component lots tracked', roast: 'medium-dark', family: 'Chocolate & nutty', shelfLife: 30, peakDays: 24, bagKg: 2, pricePerKg: 980, singleOrigin: false, traceScore: 2, lotKg: 600 },
 ]
 
-const BASE_CAFES = [
+const USER_CAFES = [
   'Absolute Coffee Brewers',
   'Cafe Chapter One',
   'Coffee By Di Bella',
@@ -39,24 +39,10 @@ const BASE_CAFES = [
 ]
 
 const NAMES = [
-  ...BASE_CAFES,
-  'Absolute Coffee Brewers · Apollo',
-  'Cafe Chapter One · Central',
-  'Coffee By Di Bella · Signature',
-  'DripCo · Specialty Lab',
-  'Love Over Coffee · Heritage',
-  'Starbucks · Reserve',
-  'Virtual Coworks · Tech Hub',
-  'The Eyry (Apollo Premier) · Terrace',
-  'Cafe Terazza (Airen Heights) · Lounge',
-  'Chai-Vaai Cafe · Roastery',
-  'Mama Loca · Downtown',
-  'Farzi Cafe · Bistro Bar',
-  'Cafe Palette · Art Space',
-  'Mangosteen Cafe · Garden',
-  'The Nest · Boutique',
-  'Mitti Cafe · Community Hub',
-  ...BASE_CAFES.map((c) => `${c} Express`),
+  ...USER_CAFES,
+  ...USER_CAFES.map((c) => `${c} (Central)`),
+  ...USER_CAFES.map((c) => `${c} (Express)`),
+  ...USER_CAFES.map((c) => `${c} (Roastery)`),
 ]
 const OWNERS = ['Ana Fernandes', 'Rohan Naik', 'Priya Kamat', 'Joel D’Souza', 'Meera Shetty', 'Karan Desai', 'Sana Shaikh', 'Vikram Rao', 'Leah Pinto', 'Arjun Prabhu', 'Nisha Gaonkar', 'Dev Sawant']
 const CITIES = ['Panaji', 'Mapusa', 'Assagao', 'Margao', 'Vasco', 'Anjuna', 'Siolim']
@@ -106,10 +92,10 @@ export function buildSeed(): State {
     })
     const cafe: Cafe = {
       id: 'c' + (i + 1),
-      name: NAMES[i],
+      name: NAMES[i % NAMES.length],
       owner: OWNERS[i % OWNERS.length],
       phone: '+91 98' + String(20000000 + Math.floor(r() * 7e7)).slice(0, 8),
-      email: NAMES[i].toLowerCase().replace(/[^a-z]+/g, '') + '@mail.in',
+      email: (NAMES[i % NAMES.length] || 'cafe').toLowerCase().replace(/[^a-z0-9]+/g, '') + '@mail.in',
       address: `${Math.floor(r() * 200) + 1}, Main Road`,
       city: CITIES[i % CITIES.length],
       type, seats, status: p.status, reductionPct: p.status === 'reduced' ? p.pct : 0,
@@ -155,7 +141,7 @@ export function buildSeed(): State {
   }
 
   const st: State = {
-    version: 4, beans: BEANS.map((b) => ({ ...b })), cafes, orders, messages: [], audit: [], moves: {}, rejected: [], dismissedRisk: [],
+    version: 5, beans: BEANS.map((b) => ({ ...b })), cafes, orders, messages: [], audit: [], moves: {}, rejected: [], dismissedRisk: [],
     alerts: [
       { id: uid(), ts: Date.now() - 36e5 * 5, to: 'roastery', kind: 'risk', text: 'Great Compression: 17 partners closed, 22 cut orders by 40% or more.' },
       { id: uid(), ts: Date.now() - 36e5 * 3, to: 'roastery', kind: 'info', text: 'New café self-registered: Mitti Cafe (pending approval).' },
